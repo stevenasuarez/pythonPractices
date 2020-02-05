@@ -19,3 +19,15 @@ class Deck:
         else:
             if value == 'J' or value == 'Q' or value == 'K':
                 return 10
+            elif value == 'A':
+                while True:
+                    ace_value = input('Do you want it to be 1 or 11?')
+                    if ace_value.isdigit():
+                        if int(ace_value) == 1 or int(ace_value) == 11:
+                            return int(ace_value)
+                        else:
+                            print('Please input a numeric option between 1 or 11')
+                    else:
+                        print('Please input a numeric option between 1 or 11')
+
+

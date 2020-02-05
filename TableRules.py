@@ -1,5 +1,4 @@
 from Deck import Deck
-from Player import Player
 
 import random
 
@@ -28,7 +27,9 @@ class TableRules:
         return 'ici'
 
     def serve_random_card(self):
-        return random.choice(self.deck)
+        random_card = random.choice(self.deck)
+        self.deck.remove(random_card)
+        return random_card
 
     def reset_deck(self):
         self.deck = Deck()
