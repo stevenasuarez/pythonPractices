@@ -5,12 +5,11 @@ pl = Player()
 p2 = Player(True)
 tr = TableRules()
 
-print(pl)
-#print(p2)
-
 print(tr.deal_cards(pl))
-#print(pl.hand)
-#print(pl.is_dealer)
-#print(deck.get_52_k())
+if not tr.is_winner_defined:
+    print(tr.deal_cards(p2))
+
+print(pl)
+print(p2)
 
 

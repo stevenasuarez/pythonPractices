@@ -1,16 +1,20 @@
 class Player:
-    card_count = 0
-
-    def __init__(self, is_dealer=False, bankroll=0, hand=[]):
+    def __init__(self, is_dealer=False, is_busted=False, bankroll=0, hand=None, card_count=0):
         self.bankroll = bankroll
-        self.hand = hand
         self.is_dealer = is_dealer
+        self.is_busted = is_busted
+        self.card_count = card_count
+        if hand:
+            self.hand = hand
+        else:
+            self.hand = []
 
     def __str__(self):
         return f"Hey" \
                f"\nThe player has a bankroll of {self.bankroll}" \
                f"\nCards in Hand: {self.hand}" \
-               f"\nAnd a card count equal to {self.card_count}"
+               f"\nAnd a card count equal to {self.card_count}" \
+               f"\n is dealer {self.is_dealer}"
 
     def increase_bankroll(self, money_won=0):
         if money_won == 0:
@@ -26,3 +30,9 @@ class Player:
 
     def increase_card_count(self, value):
         self.card_count += value
+
+    def check_player_role(self):
+        if self.is_dealer:
+            return 'Player'
+        else:
+            return 'Croupier'
