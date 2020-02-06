@@ -8,19 +8,17 @@ class TableRules:
     dc = Deck()
     deck = dc.get_52_k()
 
+    def deal_open_set(self, player):
+        for i in range(0, 2):
+            self.add_cards_to_hand(player)
+
+
     def deal_cards(self, player):
         try:
             while True:
                 hit = input('Do you wanna hit or stay? input h or s respectively')
                 if hit == 'h':
-                    card = self.serve_random_card()
-                    card_value = self.dc.get_card_value(card)
-                    player.increase_card_count(card_value)
-                    print(f"player count {player.card_count}")
-                    if card not in player.hand:
-                        player.hit_card(card)
-                        print(f"After {player.hand}")
-                        self.check_busted(player)
+                    self.add_cards_to_hand(player)
                 elif hit == 's':
                     break
                 else:
@@ -29,6 +27,16 @@ class TableRules:
             print('Bust')
             pass
         return 'ici'
+
+    def add_cards_to_hand(self, player):
+        card = self.serve_random_card()
+        card_value = self.dc.get_card_value(card)
+        player.increase_card_count(card_value)
+        print(f"player count {player.card_count}")
+        if card not in player.hand:
+            player.hit_card(card)
+            print(f"Current hand {player.hand}")
+            self.check_busted(player)
 
     def serve_random_card(self):
         random_card = random.choice(self.deck)
