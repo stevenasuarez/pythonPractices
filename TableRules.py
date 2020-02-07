@@ -4,6 +4,7 @@ import random
 
 
 class TableRules:
+    bet_money = 0
     is_winner_defined = False
     dc = Deck()
     deck = dc.get_52_k()
@@ -21,6 +22,7 @@ class TableRules:
             while True:
                 hit = input(f'\nYour current hand is {player.hand}'
                             f'\nYour current count is {player.card_count}'
+                            f'\nCurrent bet {self.bet_money}'
                             f'\nDo you wanna hit or stay? input h or s respectively')
                 if hit == 'h':
                     self.add_cards_to_hand(player)
@@ -36,7 +38,6 @@ class TableRules:
         card = self.serve_random_card()
         card_value = self.dc.get_card_value(card)
         player.increase_card_count(card_value)
-        print(f"player count {player.card_count}")
         if card not in player.hand:
             player.hit_card(card)
             self.check_busted(player)

@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, is_dealer=False, is_busted=False, bankroll=0, hand=None, card_count=0):
+    def __init__(self, bankroll=0, is_dealer=False, is_busted=False, hand=None, card_count=0):
         self.bankroll = bankroll
         self.is_dealer = is_dealer
         self.is_busted = is_busted
