@@ -31,8 +31,13 @@ class Player:
     def increase_card_count(self, value):
         self.card_count += value
 
-    def check_player_role(self):
+    def get_player_hand(self):
         if self.is_dealer:
-            return 'Player'
+            printable_hand = ['X']
+            for card in self.hand[1:]:
+                printable_hand.append(card)
+            print(f'Croupier current hand'
+                  f'\n{printable_hand}')
         else:
-            return 'Croupier'
+            print(f'Player current hand'
+                  f'\n{self.hand}')

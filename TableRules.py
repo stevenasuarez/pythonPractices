@@ -10,13 +10,18 @@ class TableRules:
 
     def deal_open_set(self, player):
         for i in range(0, 2):
-            self.add_cards_to_hand(player)
+            try:
+                self.add_cards_to_hand(player)
+            except PlayerBusted:
+                pass
 
 
     def deal_cards(self, player):
         try:
             while True:
-                hit = input('Do you wanna hit or stay? input h or s respectively')
+                hit = input(f'\nYour current hand is {player.hand}'
+                            f'\nYour current count is {player.card_count}'
+                            f'\nDo you wanna hit or stay? input h or s respectively')
                 if hit == 'h':
                     self.add_cards_to_hand(player)
                 elif hit == 's':
@@ -24,7 +29,6 @@ class TableRules:
                 else:
                     print('Please enter either h or s')
         except PlayerBusted:
-            print('Bust')
             pass
         return 'ici'
 
@@ -35,7 +39,6 @@ class TableRules:
         print(f"player count {player.card_count}")
         if card not in player.hand:
             player.hit_card(card)
-            print(f"Current hand {player.hand}")
             self.check_busted(player)
 
     def serve_random_card(self):
@@ -46,6 +49,8 @@ class TableRules:
     def check_busted(self, player):
         if player.card_count > 21:
             print('You are busted!')
+            self.is_winner_defined = True
+            player.is_busted = True
             raise PlayerBusted
         elif player.card_count == 21:
             print('You have won')
